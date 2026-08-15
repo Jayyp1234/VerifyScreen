@@ -9,7 +9,7 @@
 <meta property="og:title" content="VerifyScreen — Vendor Integrity Screening">
 <meta property="og:description" content="Rules-only on day one; rules + ML after 240 audits. Toggle between the two and watch which vendors the rules alone miss.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f6e6e'/><text x='16' y='22' font-family='Helvetica,Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'>VS</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2 4 5.5v6c0 5 3.4 8.9 8 10.5 4.6-1.6 8-5.5 8-10.5v-6L12 2z'/><path d='m8.5 12 2.5 2.5 5-5'/></svg>">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body data-mode="A">
@@ -18,75 +18,95 @@
 
 <header>
   <div class="head-in">
+
     <div class="wordmark">
-      <div class="glyph" aria-hidden="true">VS</div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 2 4 5.5v6c0 5 3.4 8.9 8 10.5 4.6-1.6 8-5.5 8-10.5v-6L12 2z"/>
+        <path d="m8.5 12 2.5 2.5 5-5"/>
+      </svg>
       <div>
         <div class="name">VERIFYSCREEN</div>
         <div class="sub">Vendor Integrity Screening</div>
       </div>
     </div>
-    <div class="head-spacer"></div>
-    <div class="toggle">
-      <span class="lab" id="mode-lab">Mode</span>
-      <div class="switch" role="group" aria-labelledby="mode-lab">
-        <button type="button" id="btn-A" aria-pressed="true">A &middot; Rules-Only</button>
-        <button type="button" id="btn-B" aria-pressed="false">B &middot; Hybrid</button>
-      </div>
+
+    <div class="modeline">
+      <div class="title" id="mode-title"></div>
+      <div class="sub" id="mode-sub"></div>
     </div>
+
+    <div class="head-right">
+      <div class="switch" role="group" aria-label="Screening mode">
+        <span class="glider" aria-hidden="true"></span>
+        <button type="button" id="btn-A" aria-pressed="true">Mode A<span class="knob" aria-hidden="true"></span></button>
+        <button type="button" id="btn-B" aria-pressed="false"><span class="knob" aria-hidden="true"></span>Mode B</button>
+      </div>
+      <button type="button" class="icon-btn" id="info-btn" aria-label="How these scores are produced">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5"/><path d="M12 7.6v.6"/>
+        </svg>
+      </button>
+    </div>
+
   </div>
 </header>
-
-<div class="banner">
-  <div class="banner-in">
-    <h1 id="banner-head"></h1>
-    <p id="banner-sub"></p>
-  </div>
-</div>
 
 <main class="wrap">
 
   <section class="card" id="worklist" aria-labelledby="wl-h">
-    <div class="card-head">
-      <h2 id="wl-h">Vendor Worklist &mdash; ranked by risk score</h2>
-      <span class="count" id="wl-count"></span>
+    <div class="pad">
+      <h2 class="card-title" id="wl-h">Vendor Worklist (Ranked by Risk Score)</h2>
+
+      <div class="controls">
+        <div class="search">
+          <input type="search" id="q" placeholder="Search vendor&hellip;" aria-label="Search vendors" autocomplete="off" spellcheck="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.7-4.7"/>
+          </svg>
+        </div>
+        <select id="tier-filter" aria-label="Filter by tier">
+          <option value="">All Tiers</option>
+          <option value="HIGH">High only</option>
+          <option value="ELEVATED">Elevated only</option>
+          <option value="LOW">Low only</option>
+        </select>
+        <select id="sort" aria-label="Sort worklist">
+          <option value="risk">Sort by Risk (High &rarr; Low)</option>
+          <option value="risk-asc">Sort by Risk (Low &rarr; High)</option>
+          <option value="name">Sort by Vendor (A&ndash;Z)</option>
+          <option value="gap">Sort by Rules-vs-Hybrid gap</option>
+        </select>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Vendor</th>
+            <th scope="col" class="score-h">Risk Score</th>
+            <th scope="col" class="tier-h">Tier</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p class="empty" id="wl-empty" hidden>No vendor matches that search and filter.</p>
     </div>
 
-    <div class="controls">
-      <input type="search" id="q" placeholder="Search vendor&hellip;" aria-label="Search vendors" autocomplete="off" spellcheck="false">
-      <select id="tier-filter" aria-label="Filter by tier">
-        <option value="">All tiers</option>
-        <option value="HIGH">High only</option>
-        <option value="ELEVATED">Elevated only</option>
-        <option value="LOW">Low only</option>
-      </select>
-      <select id="sort" aria-label="Sort worklist">
-        <option value="risk">Risk score &darr;</option>
-        <option value="risk-asc">Risk score &uarr;</option>
-        <option value="name">Vendor A&ndash;Z</option>
-        <option value="gap">Rules&ndash;vs&ndash;hybrid gap</option>
-      </select>
+    <div class="list-foot">
+      <span id="wl-count"></span>
+      <span class="hint"><span class="kbd">&uarr;</span> <span class="kbd">&darr;</span> move &middot;
+        <span class="kbd">m</span> switch mode &middot; <span class="kbd">/</span> search</span>
     </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Vendor</th>
-          <th scope="col" class="num">Risk score</th>
-          <th scope="col">Tier</th>
-        </tr>
-      </thead>
-      <tbody id="rows"></tbody>
-    </table>
-    <p class="empty" id="wl-empty" hidden>No vendor matches that search and filter.</p>
   </section>
 
-  <section class="card" id="verdict" aria-labelledby="vd-h"></section>
+  <section class="card" aria-labelledby="vd-h">
+    <div class="pad" id="verdict"></div>
+  </section>
 
 </main>
 
 <footer>
-  <details class="method">
+  <details class="method" id="method">
     <summary>Methodology &mdash; how these scores are produced</summary>
     <div class="body" id="method-body"></div>
   </details>
