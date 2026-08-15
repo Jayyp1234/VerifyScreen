@@ -1,0 +1,448 @@
+{
+  "meta": {
+    "tool": "VerifyScreen",
+    "version": "0.1.0",
+    "n_audits": 240,
+    "blend_weight": 0.5986,
+    "note": "Vendor names are fictitious; profiles are simulated. Scores computed by the real VerifyScreen engine (rules) and a logistic-regression ML layer trained on the documented DGP.",
+    "tiers": {
+      "HIGH": 0.66,
+      "ELEVATED": 0.4
+    }
+  },
+  "signals": [
+    {
+      "key": "capacity_contract_ratio",
+      "label": "Capacity-to-Contract Ratio",
+      "reason": "Capacity is low relative to contract size.",
+      "direction": "below",
+      "threshold": 0.55,
+      "bound": 0.05,
+      "severity": 1.0
+    },
+    {
+      "key": "subcontract_share",
+      "label": "Subcontracting Share",
+      "reason": "High reliance on subcontractors, often abroad.",
+      "direction": "above",
+      "threshold": 0.55,
+      "bound": 0.95,
+      "severity": 1.0
+    },
+    {
+      "key": "yard_footprint_log",
+      "label": "Fabrication Yard Footprint",
+      "reason": "Registered yard is small for the scope of work.",
+      "direction": "below",
+      "threshold": 3.2,
+      "bound": 1.8,
+      "severity": 0.8
+    },
+    {
+      "key": "tech_staff_per_m",
+      "label": "Technical Staff per US$m",
+      "reason": "Low skilled-staff headcount relative to contract value.",
+      "direction": "below",
+      "threshold": 1.5,
+      "bound": 0.2,
+      "severity": 0.7
+    },
+    {
+      "key": "jqs_depth",
+      "label": "JQS Depth",
+      "reason": "Limited JQS/NIPEX prequalification depth.",
+      "direction": "below",
+      "threshold": 4.0,
+      "bound": 0.5,
+      "severity": 0.55
+    },
+    {
+      "key": "expat_ratio",
+      "label": "Expatriate-Quota Ratio",
+      "reason": "High dependence on expatriate labour.",
+      "direction": "above",
+      "threshold": 0.35,
+      "bound": 0.9,
+      "severity": 0.6
+    },
+    {
+      "key": "ncdf_compliance",
+      "label": "NCDF Compliance",
+      "reason": "Weak or lapsed Nigerian Content Development Fund compliance.",
+      "direction": "below",
+      "threshold": 0.6,
+      "bound": 0.1,
+      "severity": 0.5
+    },
+    {
+      "key": "prior_delivery",
+      "label": "Prior-Delivery Record",
+      "reason": "Limited or poor track record on comparable scopes.",
+      "direction": "below",
+      "threshold": 2.0,
+      "bound": 0.0,
+      "severity": 0.65
+    }
+  ],
+  "vendors": [
+    {
+      "id": "V001",
+      "name": "Delta Offshore Ltd.",
+      "rule_score": 0.8073,
+      "ml_score": 1.0,
+      "features": {
+        "capacity_contract_ratio": 0.12,
+        "subcontract_share": 0.92,
+        "yard_footprint_log": 2.0,
+        "tech_staff_per_m": 0.3,
+        "jqs_depth": 1.5,
+        "expat_ratio": 0.6,
+        "ncdf_compliance": 0.35,
+        "prior_delivery": 0.0
+      },
+      "top_flags": [
+        {
+          "rule": "Excessive subcontracting",
+          "reason": "Most of the scope is passed to third parties (often abroad), so little real value is delivered in-country.",
+          "contribution": 0.925
+        },
+        {
+          "rule": "Under-capacity for contract value",
+          "reason": "Verified fabrication capacity is far below the contract value won \u2014 the classic sign of winning work that must be built elsewhere.",
+          "contribution": 0.86
+        },
+        {
+          "rule": "No real fabrication yard",
+          "reason": "Registered fabrication footprint is negligible \u2014 an office, not a yard.",
+          "contribution": 0.686
+        },
+        {
+          "rule": "No delivery track record",
+          "reason": "Few or no completed comparable oil-and-gas scopes.",
+          "contribution": 0.65
+        }
+      ],
+      "hybrid_score": 0.9226,
+      "rule_tier": "HIGH",
+      "hybrid_tier": "HIGH"
+    },
+    {
+      "id": "V003",
+      "name": "Westfield Energy Solutions",
+      "rule_score": 0.4611,
+      "ml_score": 0.9833,
+      "features": {
+        "capacity_contract_ratio": 0.804,
+        "subcontract_share": 0.94,
+        "yard_footprint_log": 2.588,
+        "tech_staff_per_m": 0.0,
+        "jqs_depth": 5.703,
+        "expat_ratio": 0.228,
+        "ncdf_compliance": 0.646,
+        "prior_delivery": 0.0
+      },
+      "top_flags": [
+        {
+          "rule": "Excessive subcontracting",
+          "reason": "Most of the scope is passed to third parties (often abroad), so little real value is delivered in-country.",
+          "contribution": 0.975
+        },
+        {
+          "rule": "Too few technical staff",
+          "reason": "Welders, subsea and QA/QC headcount per US$m of contract is far too low to self-deliver.",
+          "contribution": 0.7
+        },
+        {
+          "rule": "No delivery track record",
+          "reason": "Few or no completed comparable oil-and-gas scopes.",
+          "contribution": 0.65
+        },
+        {
+          "rule": "No real fabrication yard",
+          "reason": "Registered fabrication footprint is negligible \u2014 an office, not a yard.",
+          "contribution": 0.35
+        }
+      ],
+      "hybrid_score": 0.7737,
+      "rule_tier": "ELEVATED",
+      "hybrid_tier": "HIGH"
+    },
+    {
+      "id": "V002",
+      "name": "Oceanic Services Nig. Ltd.",
+      "rule_score": 0.4472,
+      "ml_score": 0.999,
+      "features": {
+        "capacity_contract_ratio": 0.3,
+        "subcontract_share": 0.78,
+        "yard_footprint_log": 2.6,
+        "tech_staff_per_m": 0.9,
+        "jqs_depth": 2.0,
+        "expat_ratio": 0.5,
+        "ncdf_compliance": 0.55,
+        "prior_delivery": 1.0
+      },
+      "top_flags": [
+        {
+          "rule": "Excessive subcontracting",
+          "reason": "Most of the scope is passed to third parties (often abroad), so little real value is delivered in-country.",
+          "contribution": 0.575
+        },
+        {
+          "rule": "Under-capacity for contract value",
+          "reason": "Verified fabrication capacity is far below the contract value won \u2014 the classic sign of winning work that must be built elsewhere.",
+          "contribution": 0.5
+        },
+        {
+          "rule": "No real fabrication yard",
+          "reason": "Registered fabrication footprint is negligible \u2014 an office, not a yard.",
+          "contribution": 0.343
+        },
+        {
+          "rule": "No delivery track record",
+          "reason": "Few or no completed comparable oil-and-gas scopes.",
+          "contribution": 0.325
+        }
+      ],
+      "hybrid_score": 0.7775,
+      "rule_tier": "ELEVATED",
+      "hybrid_tier": "HIGH"
+    },
+    {
+      "id": "V004",
+      "name": "Primewell Engineering Ltd.",
+      "rule_score": 0.3103,
+      "ml_score": 0.6909,
+      "features": {
+        "capacity_contract_ratio": 1.246,
+        "subcontract_share": 0.951,
+        "yard_footprint_log": 1.548,
+        "tech_staff_per_m": 2.205,
+        "jqs_depth": 5.275,
+        "expat_ratio": 0.248,
+        "ncdf_compliance": 0.644,
+        "prior_delivery": 6.0
+      },
+      "top_flags": [
+        {
+          "rule": "Excessive subcontracting",
+          "reason": "Most of the scope is passed to third parties (often abroad), so little real value is delivered in-country.",
+          "contribution": 1.0
+        },
+        {
+          "rule": "No real fabrication yard",
+          "reason": "Registered fabrication footprint is negligible \u2014 an office, not a yard.",
+          "contribution": 0.8
+        }
+      ],
+      "hybrid_score": 0.5381,
+      "rule_tier": "LOW",
+      "hybrid_tier": "ELEVATED"
+    },
+    {
+      "id": "V005",
+      "name": "Harcourt Fabrication Ltd.",
+      "rule_score": 0.235,
+      "ml_score": 0.9679,
+      "features": {
+        "capacity_contract_ratio": 0.961,
+        "subcontract_share": 1.0,
+        "yard_footprint_log": 2.963,
+        "tech_staff_per_m": 1.878,
+        "jqs_depth": 2.667,
+        "expat_ratio": 0.201,
+        "ncdf_compliance": 0.582,
+        "prior_delivery": 2.0
+      },
+      "top_flags": [
+        {
+          "rule": "Excessive subcontracting",
+          "reason": "Most of the scope is passed to third parties (often abroad), so little real value is delivered in-country.",
+          "contribution": 1.0
+        },
+        {
+          "rule": "Shallow qualification history",
+          "reason": "Little registered depth in the JQS/NIPEX databank \u2014 new or thin vendor.",
+          "contribution": 0.209
+        },
+        {
+          "rule": "No real fabrication yard",
+          "reason": "Registered fabrication footprint is negligible \u2014 an office, not a yard.",
+          "contribution": 0.135
+        }
+      ],
+      "hybrid_score": 0.6737,
+      "rule_tier": "LOW",
+      "hybrid_tier": "HIGH"
+    },
+    {
+      "id": "V006",
+      "name": "Seabright Technical Services",
+      "rule_score": 0.1939,
+      "ml_score": 0.8458,
+      "features": {
+        "capacity_contract_ratio": 0.639,
+        "subcontract_share": 0.607,
+        "yard_footprint_log": 3.039,
+        "tech_staff_per_m": 2.798,
+        "jqs_depth": 2.476,
+        "expat_ratio": 0.185,
+        "ncdf_compliance": 0.677,
+        "prior_delivery": 0.0
+      },
+      "top_flags": [
+        {
+          "rule": "No delivery track record",
+          "reason": "Few or no completed comparable oil-and-gas scopes.",
+          "contribution": 0.65
+        },
+        {
+          "rule": "Shallow qualification history",
+          "reason": "Little registered depth in the JQS/NIPEX databank \u2014 new or thin vendor.",
+          "contribution": 0.24
+        }
+      ],
+      "hybrid_score": 0.5841,
+      "rule_tier": "LOW",
+      "hybrid_tier": "ELEVATED"
+    },
+    {
+      "id": "V007",
+      "name": "Meridian Subsea Ltd.",
+      "rule_score": 0.145,
+      "ml_score": 0.4007,
+      "features": {
+        "capacity_contract_ratio": 0.162,
+        "subcontract_share": 0.576,
+        "yard_footprint_log": 4.172,
+        "tech_staff_per_m": 1.937,
+        "jqs_depth": 9.541,
+        "expat_ratio": 0.288,
+        "ncdf_compliance": 0.951,
+        "prior_delivery": 4.0
+      },
+      "top_flags": [
+        {
+          "rule": "Under-capacity for contract value",
+          "reason": "Verified fabrication capacity is far below the contract value won \u2014 the classic sign of winning work that must be built elsewhere.",
+          "contribution": 0.776
+        }
+      ],
+      "hybrid_score": 0.2981,
+      "rule_tier": "LOW",
+      "hybrid_tier": "LOW"
+    },
+    {
+      "id": "V008",
+      "name": "Nigerian Energy Partners",
+      "rule_score": 0.1065,
+      "ml_score": 0.0116,
+      "features": {
+        "capacity_contract_ratio": 1.318,
+        "subcontract_share": 0.462,
+        "yard_footprint_log": 2.119,
+        "tech_staff_per_m": 2.809,
+        "jqs_depth": 8.709,
+        "expat_ratio": 0.199,
+        "ncdf_compliance": 0.758,
+        "prior_delivery": 6.0
+      },
+      "top_flags": [
+        {
+          "rule": "No real fabrication yard",
+          "reason": "Registered fabrication footprint is negligible \u2014 an office, not a yard.",
+          "contribution": 0.618
+        }
+      ],
+      "hybrid_score": 0.0497,
+      "rule_tier": "LOW",
+      "hybrid_tier": "LOW"
+    },
+    {
+      "id": "V009",
+      "name": "Coastline Integrated Ltd.",
+      "rule_score": 0.0639,
+      "ml_score": 0.0123,
+      "features": {
+        "capacity_contract_ratio": 1.374,
+        "subcontract_share": 0.698,
+        "yard_footprint_log": 3.23,
+        "tech_staff_per_m": 3.221,
+        "jqs_depth": 9.099,
+        "expat_ratio": 0.102,
+        "ncdf_compliance": 0.763,
+        "prior_delivery": 6.0
+      },
+      "top_flags": [
+        {
+          "rule": "Excessive subcontracting",
+          "reason": "Most of the scope is passed to third parties (often abroad), so little real value is delivered in-country.",
+          "contribution": 0.371
+        }
+      ],
+      "hybrid_score": 0.033,
+      "rule_tier": "LOW",
+      "hybrid_tier": "LOW"
+    },
+    {
+      "id": "V010",
+      "name": "Atlas Marine Nig. Ltd.",
+      "rule_score": 0.0263,
+      "ml_score": 0.2284,
+      "features": {
+        "capacity_contract_ratio": 0.85,
+        "subcontract_share": 0.597,
+        "yard_footprint_log": 3.796,
+        "tech_staff_per_m": 2.824,
+        "jqs_depth": 10.204,
+        "expat_ratio": 0.301,
+        "ncdf_compliance": 0.566,
+        "prior_delivery": 4.0
+      },
+      "top_flags": [],
+      "hybrid_score": 0.1473,
+      "rule_tier": "LOW",
+      "hybrid_tier": "LOW"
+    },
+    {
+      "id": "V011",
+      "name": "Riverside Oilfield Svcs",
+      "rule_score": 0.0,
+      "ml_score": 0.0019,
+      "features": {
+        "capacity_contract_ratio": 1.286,
+        "subcontract_share": 0.312,
+        "yard_footprint_log": 4.623,
+        "tech_staff_per_m": 4.459,
+        "jqs_depth": 10.892,
+        "expat_ratio": 0.212,
+        "ncdf_compliance": 0.667,
+        "prior_delivery": 4.0
+      },
+      "top_flags": [],
+      "hybrid_score": 0.0011,
+      "rule_tier": "LOW",
+      "hybrid_tier": "LOW"
+    },
+    {
+      "id": "V012",
+      "name": "Genuine Fabrication Co. Ltd.",
+      "rule_score": 0.0,
+      "ml_score": 0.0041,
+      "features": {
+        "capacity_contract_ratio": 0.95,
+        "subcontract_share": 0.3,
+        "yard_footprint_log": 3.9,
+        "tech_staff_per_m": 2.8,
+        "jqs_depth": 8.0,
+        "expat_ratio": 0.15,
+        "ncdf_compliance": 0.9,
+        "prior_delivery": 6.0
+      },
+      "top_flags": [],
+      "hybrid_score": 0.0025,
+      "rule_tier": "LOW",
+      "hybrid_tier": "LOW"
+    }
+  ]
+}

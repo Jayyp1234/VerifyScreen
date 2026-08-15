@@ -1,0 +1,14 @@
+{
+  "name": "verifyscreen-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static, no-backend demo of VerifyScreen — vendor-integrity screening in Rules-Only and Hybrid modes.",
+  "license": "MIT",
+  "scripts": {
+    "sync": "node tools/build.mjs",
+    "verify": "node tools/verify.mjs",
+    "check": "npm run sync && npm run verify",
+    "serve": "python3 -m http.server 8080"
+  }
+}

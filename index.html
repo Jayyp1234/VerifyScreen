@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VerifyScreen — Vendor Integrity Screening</title>
+<meta name="description" content="A working demo of VerifyScreen: rules-only vendor screening on day one, and a hybrid rules + machine-learning screen after audits accumulate. Twelve simulated Nigerian oil-and-gas vendors, scored by the real engine.">
+<meta name="color-scheme" content="light">
+<meta property="og:title" content="VerifyScreen — Vendor Integrity Screening">
+<meta property="og:description" content="Rules-only on day one; rules + ML after 240 audits. Toggle between the two and watch which vendors the rules alone miss.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f6e6e'/><text x='16' y='22' font-family='Helvetica,Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'>VS</text></svg>">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-mode="A">
+
+<a class="skip" href="#worklist">Skip to the vendor worklist</a>
+
+<header>
+  <div class="head-in">
+    <div class="wordmark">
+      <div class="glyph" aria-hidden="true">VS</div>
+      <div>
+        <div class="name">VERIFYSCREEN</div>
+        <div class="sub">Vendor Integrity Screening</div>
+      </div>
+    </div>
+    <div class="head-spacer"></div>
+    <div class="toggle">
+      <span class="lab" id="mode-lab">Mode</span>
+      <div class="switch" role="group" aria-labelledby="mode-lab">
+        <button type="button" id="btn-A" aria-pressed="true">A &middot; Rules-Only</button>
+        <button type="button" id="btn-B" aria-pressed="false">B &middot; Hybrid</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="banner">
+  <div class="banner-in">
+    <h1 id="banner-head"></h1>
+    <p id="banner-sub"></p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="card" id="worklist" aria-labelledby="wl-h">
+    <div class="card-head">
+      <h2 id="wl-h">Vendor Worklist &mdash; ranked by risk score</h2>
+      <span class="count" id="wl-count"></span>
+    </div>
+
+    <div class="controls">
+      <input type="search" id="q" placeholder="Search vendor&hellip;" aria-label="Search vendors" autocomplete="off" spellcheck="false">
+      <select id="tier-filter" aria-label="Filter by tier">
+        <option value="">All tiers</option>
+        <option value="HIGH">High only</option>
+        <option value="ELEVATED">Elevated only</option>
+        <option value="LOW">Low only</option>
+      </select>
+      <select id="sort" aria-label="Sort worklist">
+        <option value="risk">Risk score &darr;</option>
+        <option value="risk-asc">Risk score &uarr;</option>
+        <option value="name">Vendor A&ndash;Z</option>
+        <option value="gap">Rules&ndash;vs&ndash;hybrid gap</option>
+      </select>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Vendor</th>
+          <th scope="col" class="num">Risk score</th>
+          <th scope="col">Tier</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="empty" id="wl-empty" hidden>No vendor matches that search and filter.</p>
+  </section>
+
+  <section class="card" id="verdict" aria-labelledby="vd-h"></section>
+
+</main>
+
+<footer>
+  <details class="method">
+    <summary>Methodology &mdash; how these scores are produced</summary>
+    <div class="body" id="method-body"></div>
+  </details>
+
+  <p class="note" id="honesty"></p>
+</footer>
+
+<p class="sr-only" aria-live="polite" id="sr-status"></p>
+
+<script src="assets/generated.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
