@@ -181,7 +181,7 @@
           '<div class="ghost" style="left:' + (ghost * 100) + '%" title="Rule-only score: ' + f2(ghost) + '"></div>') +
         '<div class="needle" style="left:' + (score * 100) + '%"></div>' +
       "</div>" +
-      '<div class="ticks"><span>0</span><span style="left:40%">0.40</span>' +
+      '<div class="ticks"><span style="left:0">0</span><span style="left:40%">0.40</span>' +
       '<span style="left:66%">0.66</span><span style="left:100%">1.00</span></div>';
   }
 
@@ -474,7 +474,12 @@
       "<strong>Keyboard:</strong> <span class=\"kbd\">↑</span> <span class=\"kbd\">↓</span> move through the " +
       'worklist &middot; <span class="kbd">m</span> switch mode &middot; <span class="kbd">/</span> search. ' +
       "The URL tracks the selected vendor and the mode, so any view here can be linked to directly. " +
-      "Nothing is uploaded: there is no backend, and every score is either read from a static file or computed in your browser.";
+      "Nothing is uploaded: there is no backend, and every score is either read from a static file or computed in your browser." +
+      '<hr class="rule">' +
+      'Open source, MIT-licensed &mdash; <a href="https://github.com/Jayyp1234/VerifyScreen" ' +
+      'target="_blank" rel="noopener">source code and the data behind every score on GitHub</a>. ' +
+      "Run <span class=\"kbd\">npm run verify</span> in the repo to re-derive all " + VENDORS.length +
+      " scores from the raw feature values.";
   }
 
   /* ----------------------------------------------------------------- glue */
