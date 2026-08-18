@@ -2,8 +2,8 @@
 
 **Catch the front company before the contract is awarded.**
 
-[![tests](https://github.com/Jayyp1234/VerifyScreen/actions/workflows/ci.yml/badge.svg)](https://github.com/Jayyp1234/VerifyScreen/actions/workflows/ci.yml)
 [![python](https://img.shields.io/badge/python-3.9%20%E2%80%93%203.13-blue)](https://www.python.org/)
+[![tests](https://img.shields.io/badge/tests-8%20passing-brightgreen)](tests/test_verifyscreen.py)
 [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![live demo](https://img.shields.io/badge/demo-live-1d4ed8)](https://jayyp1234.github.io/VerifyScreen/)
 
