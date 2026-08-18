@@ -1,5 +1,7 @@
-// Exact browser port of verifyscreen/rules.py + screener.py blend math.
-// Verified to reproduce the Python engine bit-for-bit (genuine 0.00, briefcase 0.8073).
+// Browser port of verifyscreen/rules.py and verifyscreen/screener.py.
+// Kept honest by models/check_browser_parity.py (Python side) and tools/verify.mjs
+// (JavaScript side); both assert against public/data.json, so the two engines cannot
+// drift apart without a check failing.
 export function below(t, floor){ return v => v>=t ? 0 : Math.min(1,(t-v)/(t-floor)); }
 export function above(t, ceil){  return v => v<=t ? 0 : Math.min(1,(v-t)/Math.max(ceil-t,1e-6)); }
 

@@ -1,9 +1,9 @@
 {
-  "name": "verifyscreen-web",
+  "name": "verifyscreen-console",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Static, no-backend demo of VerifyScreen — vendor-integrity screening in Rules-Only and Hybrid modes.",
+  "description": "Browser console for VerifyScreen: ranked vendor worklist and decomposed risk scores.",
   "license": "MIT",
   "scripts": {
     "sync": "node tools/build.mjs",

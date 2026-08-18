@@ -1,6 +1,10 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.venv/
+venv/
 node_modules/
 .DS_Store
-ChatGPT Image*.png
-.vercel
-.claude/
-*.log

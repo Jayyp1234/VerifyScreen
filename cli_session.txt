@@ -1,0 +1,95 @@
+$ verifyscreen verifyscreen/data/vendors_reference.csv --summary
+VerifyScreen 0.1.0 - vendor integrity screening
+Mode A (rules-only) - no audit labels supplied
+
+  Screened             1,000 vendors
+  Flagged for audit       13   HIGH       risk >= 0.66
+  Routine                987   of which:
+      elevated            63   ELEVATED   risk >= 0.40
+      low                924   LOW
+
+  The audit worklist concentrates on 1.3% of the portfolio.
+
+Rank  Vendor                                   Risk  Tier      Leading red flag
+--------------------------------------------------------------------------------------------
+   1  Anchor Marine Partners Ltd.              0.80  HIGH      Under-capacity for contract value
+   2  Qua Iboe Pipeline Group Ltd.             0.73  HIGH      Under-capacity for contract value
+   3  Onne Oilfield Systems Ltd.               0.73  HIGH      Under-capacity for contract value
+   4  Beacon Technical Services Ltd.           0.72  HIGH      Under-capacity for contract value
+   5  Highland Engineering Nig. Ltd.           0.72  HIGH      Under-capacity for contract value
+   6  Delta Technical Solutions Ltd.           0.72  HIGH      Excessive subcontracting
+   7  Coastline Integrated Ltd.                0.70  HIGH      Under-capacity for contract value
+   8  Forcados Pipeline Partners Ltd.          0.70  HIGH      Excessive subcontracting
+   9  Atlas Process Nig. Ltd.                  0.68  HIGH      Under-capacity for contract value
+  10  Escravos Industrial Partners Ltd.        0.68  HIGH      Under-capacity for contract value
+  11  Anchor Marine Solutions Ltd.             0.66  HIGH      Under-capacity for contract value
+  12  Oceanic Industrial Nig. Ltd.             0.66  HIGH      Under-capacity for contract value
+  13  Southfield Fabrication Systems Ltd.      0.66  HIGH      Under-capacity for contract value
+  14  Highland Oilfield Ltd.                   0.66  ELEVATED  Under-capacity for contract value
+  15  Niger Fabrication Ltd.                   0.66  ELEVATED  Under-capacity for contract value
+      ... 985 further vendors not shown
+
+$ verifyscreen verifyscreen/data/vendors_reference.csv --out worklist.csv
+verifyscreen: wrote 1,000 ranked vendors to worklist.csv
+
+$ verifyscreen verifyscreen/data/vendors_examples.csv --explain EX-BRIEFCASE
+VerifyScreen 0.1.0 - vendor verdict
+
+  Vendor      Briefcase Ventures Ltd. (EX-BRIEFCASE)
+  Risk score  0.77 / 1.00
+  Tier        HIGH  - audit before award
+
+  Red flags driving the score
+
+    +0.155  Under-capacity for contract value
+            Capacity-to-Contract Ratio 0.1 (threshold 0.55)
+            Verified fabrication capacity is far below the contract value
+            won - the classic sign of winning work that must be built
+            elsewhere.
+
+    +0.151  Excessive subcontracting
+            Subcontracting Share 0.9 (threshold 0.55)
+            Most of the scope is passed to third parties (often abroad),
+            so little real value is delivered in-country.
+
+    +0.118  No real fabrication yard
+            Fabrication Yard Footprint 2 (threshold 3.2)
+            Registered fabrication footprint is negligible - an office,
+            not a yard.
+
+    +0.112  No delivery track record
+            Prior-Delivery Record 0 (threshold 2)
+            Few or no completed comparable oil-and-gas scopes.
+
+    +0.107  Too few technical staff
+            Technical Staff per US$m 0.35 (threshold 1.5)
+            Welders, subsea and QA/QC headcount per US$m of contract is
+            far too low to self-deliver.
+
+    +0.068  Shallow qualification history
+            JQS Depth 1.5 (threshold 4)
+            Little registered depth in the JQS/NIPEX databank - a new or
+            thin vendor.
+
+    +0.043  Heavy expatriate dependence
+            Expatriate-Quota Ratio 0.58 (threshold 0.35)
+            Expatriate quota use is high for the scope, so the skills
+            transfer the Act exists to force is not happening.
+
+    +0.017  Weak NCDF compliance
+            NCDF Compliance 0.5 (threshold 0.6)
+            Nigerian Content Development Fund remittances are partial or
+            lapsed - the levy that funds capability building is not being
+            paid.
+
+    ------  0.771  total rule score
+
+$ verifyscreen verifyscreen/data/vendors_examples.csv --explain EX-GENUINE
+VerifyScreen 0.1.0 - vendor verdict
+
+  Vendor      Genuine Fabrication Co. Ltd. (EX-GENUINE)
+  Risk score  0.00 / 1.00
+  Tier        LOW  - routine processing
+
+  No material red flags. Every signal is within threshold.
+

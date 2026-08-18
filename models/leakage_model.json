@@ -1,0 +1,61 @@
+{
+  "seed": 7,
+  "draws": 50000,
+  "inputs": {
+    "addressable_base_bn": [
+      8.0,
+      16.0
+    ],
+    "front_value_share": [
+      0.12,
+      0.25
+    ],
+    "export_fraction": [
+      0.55,
+      0.8
+    ]
+  },
+  "leakage": {
+    "median_bn": 1.4443744111694952,
+    "p10_bn": 0.9443971531465423,
+    "p90_bn": 2.139561184100052
+  },
+  "scenarios": {
+    "status_quo": {
+      "effectiveness": 0.0,
+      "median_recovered_bn": 0.0,
+      "p10_bn": 0.0,
+      "p90_bn": 0.0
+    },
+    "audits_without_triage": {
+      "effectiveness": 0.35,
+      "median_recovered_bn": 0.5055310439093232,
+      "p10_bn": 0.33053900360128974,
+      "p90_bn": 0.7488464144350182
+    },
+    "enforcement_that_bites": {
+      "effectiveness": 0.7,
+      "median_recovered_bn": 1.0110620878186465,
+      "p10_bn": 0.6610780072025795,
+      "p90_bn": 1.4976928288700364
+    }
+  },
+  "sensitivity": {
+    "base": {
+      "low_bn": 0.999,
+      "high_bn": 1.998,
+      "swing_bn": 0.999
+    },
+    "front_share": {
+      "low_bn": 0.972,
+      "high_bn": 2.0250000000000004,
+      "swing_bn": 1.0530000000000004
+    },
+    "export_fraction": {
+      "low_bn": 1.221,
+      "high_bn": 1.7760000000000002,
+      "swing_bn": 0.5550000000000002
+    }
+  },
+  "note": "Illustrative accounting model on stated assumptions. Not an official projection. Scales linearly in the front value share, the least anchored input."
+}
